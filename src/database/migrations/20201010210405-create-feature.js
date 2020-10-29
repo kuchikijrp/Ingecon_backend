@@ -4,7 +4,7 @@ const sequelize = require("sequelize");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('sys_permissions', {
+      return queryInterface.createTable('sys_features', {
           id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -14,10 +14,6 @@ module.exports = {
           name: {
             type: Sequelize.STRING,
             allowNull: false
-          },
-          description:{
-            type: Sequelize.STRING,
-            allowNull:false
           },
           created_at: {
             type: Sequelize.DATE,
@@ -31,6 +27,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-     return queryInterface.dropTable('sys_permissions');
+     return queryInterface.dropTable('sys_features');
   }
 };

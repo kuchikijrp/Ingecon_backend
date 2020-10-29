@@ -17,7 +17,8 @@ class RequestMounts extends Model {
             budgeted: DataTypes.STRING,
             time_discharge: DataTypes.STRING,
             time_work: DataTypes.STRING,
-            obs: DataTypes.TEXT
+            obs: DataTypes.TEXT,
+            status: DataTypes.STRING
         },
             {
                 sequelize

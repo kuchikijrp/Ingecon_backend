@@ -64,6 +64,9 @@ module.exports = {
       obs:{
         type: Sequelize.TEXT
       },
+      status:{
+        type: Sequelize.STRING
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false

@@ -4,15 +4,38 @@ module.exports = {
     async index(req, res){
     },
 
+
+    async delete(req, res){
+        const { id } = req.params
+
+        try {
+            await MenuArvore.destroy({
+                where:{
+                    id
+                }
+            });
+
+            return res.send()
+        } catch (error) {
+            return res.send(error)
+        }
+    },
+
     async store(req, res){
-        const {name, parent} = req.body;
+        const {name, parent, status, menu} = req.body;
         // console.log(req.body)
-
-        const itemMenu = await MenuArvore.create({
-            name,
-            parent
-        });
-
-        return res.send(itemMenu);
+        try {
+            const itemMenu = await MenuArvore.create({
+                name,
+                parent,
+                status, 
+                menu
+            });
+    
+            return res.send(itemMenu);
+            
+        } catch (error) {
+            return res.send(error)
+        }
     }
 }

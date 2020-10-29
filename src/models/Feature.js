@@ -1,12 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 
-class SysMenuArvore extends Model {
+class SysFeature extends Model {
     static init(sequelize) {
         super.init({
             name: DataTypes.STRING,
-            parent: DataTypes.INTEGER,
-            status: DataTypes.BOOLEAN,
-            menu: DataTypes.BOOLEAN
         },
             {
                 sequelize
@@ -15,4 +12,4 @@ class SysMenuArvore extends Model {
     }
 }
 
-module.exports = SysMenuArvore;
+module.exports = SysFeature;
