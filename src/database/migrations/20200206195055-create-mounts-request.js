@@ -35,6 +35,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      contact_phone:{
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       type_work: {
         type: Sequelize.STRING,
         allowNull: false

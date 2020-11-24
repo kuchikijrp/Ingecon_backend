@@ -12,6 +12,8 @@ const FeatureController = require('./controllers/FeatureController');
 const MenuArvore = require('./controllers/MenuCategoriasController');
 const MontarMenuCategorias = require('./controllers/MontaMenuCategoriasController');
 
+const CadastroClienteFilial = require('./controllers/CadastroClienteFilialController')
+
 const routes = Router();
 
 //Rotas de autenticação
@@ -40,5 +42,8 @@ routes.post('/requestmounts', authMiddleware, RequestMountsController.store);
 routes.get('/requestmounts/:idMount', authMiddleware, RequestMountsController.show);
 routes.put('/requestmounts/:idMount', authMiddleware, RequestMountsController.update);
 
+//Routes Cadastro Clientes Filial
+routes.get('/clienteFilial', authMiddleware, CadastroClienteFilial.index);
+routes.get('/clienteFilial/:id', authMiddleware, CadastroClienteFilial.show);
 
 module.exports = routes;

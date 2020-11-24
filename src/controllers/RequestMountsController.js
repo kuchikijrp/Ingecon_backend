@@ -83,7 +83,7 @@ module.exports = {
     },
 
     async store(req, res){
-        const {type, id_at, client, store, contact_store, type_work, start_work, end_work, qtd_fitters, budgeted, time_discharge, time_work, obs, emailUser} = req.body;
+        const {type, id_at, client, store, contact_store, contact_phone, type_work, start_work, end_work, qtd_fitters, budgeted, time_discharge, time_work, obs, emailUser} = req.body;
        
         const authHeader = req.headers.authorization || "";
         const [ , token] = authHeader.split(" ");
@@ -97,6 +97,7 @@ module.exports = {
                     id_at,
                     type,
                     contact_store,
+                    contact_phone,
                     client,
                     store,
                     type_work,

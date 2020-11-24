@@ -10,6 +10,7 @@ class RequestMounts extends Model {
             client: DataTypes.INTEGER,
             store: DataTypes.STRING,
             contact_store: DataTypes.STRING,
+            contact_phone: DataTypes.STRING,
             type_work: DataTypes.STRING,
             start_work: DataTypes.DATE,
             end_work: DataTypes.DATE,
