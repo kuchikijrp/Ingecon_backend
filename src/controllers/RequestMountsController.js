@@ -1,8 +1,10 @@
 const mailer = require('../modules/mailer');
 
 const RequestMount = require('../models/RequestMounts');
+const ApprovalMount = require('../models/ApprovalMounts');
+const User = require('../models/User');
+
 const { decode } = require('jsonwebtoken');
-const { update } = require('../models/RequestMounts');
 
 module.exports = {
     async show(req, res){
@@ -50,7 +52,7 @@ module.exports = {
     },
 
     async update(req, res){
-        const {idMount, status} = req.body;
+        const {idMount, status, obs} = req.body;
         // console.log(req.body);
 
         const authHeader = req.headers.authorization || "";
@@ -66,6 +68,18 @@ module.exports = {
                         id: idMount
                     }
                 });
+                
+            const user = await User.findOne({id : userid});
+            // console.log(user.dataValues.usuario);
+                
+            const approvalMount = await ApprovalMount.create({
+                user_id: userid,
+                user_name: user.dataValues.usuario,
+                mount_id: idMount,
+                status,
+                obs
+            });
+
 
                     await mailer.sendMail({
                         to: 'juliano.piris@ingecon.com.br',
@@ -78,6 +92,7 @@ module.exports = {
                 return res.send({"msg": "Solicitação salva com sucesso"})
 
         } catch (err) {
+            console.log(err)
             return res.send(err)
         }
     },

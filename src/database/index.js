@@ -1,29 +1,27 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
 
+
+const User = require('../models/User');
+const MenuArvore = require('../models/MenuArvore')
+const Feature = require('../models/Feature')
+const RequestMounts = require('../models/RequestMounts');
+const ApprovalMounts = require('../models/ApprovalMounts');
+const CadastroClienteFilial = require('../models/CadastroClienteFilial');
+
 const connection = new Sequelize(dbConfig);
 
-//MENU
-const MenuArvore = require('../models/MenuArvore')
-MenuArvore.init(connection);
 
-//TELAS
-const Feature = require('../models/Feature')
-Feature.init(connection)
-
-//USUARIOS
-const User = require('../models/User');
 User.init(connection);
-
-//ACESSOS
-
-//SOLICITACAO MONTAGEM
-const RequestMounts = require('../models/RequestMounts');
+MenuArvore.init(connection);
+Feature.init(connection)
 RequestMounts.init(connection);
-
-//CADASTRO CLIENTES FILIAL
-const CadastroClienteFilial = require('../models/CadastroClienteFilial')
+// ApprovalMounts.init(connection);;
+ApprovalMounts.init(connection);
 CadastroClienteFilial.init(connection);
 
+User.associate(connection.models);
+RequestMounts.associate(connection.models);
+ApprovalMounts.associate(connection.models);
 
 module.exports = connection;

@@ -19,6 +19,10 @@ class Users extends Model {
             }
         );
     }
+
+    static associate(models){
+    }
+    
 }
 
 module.exports = Users;

@@ -1,10 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
 
+const User = require('../models/User');
+
 class RequestMounts extends Model {
     static init(sequelize) {
         super.init({
             // request_id: DataTypes.INTEGER,
-            user_id: DataTypes.INTEGER,
+            // user_id: DataTypes.INTEGER,
             type: DataTypes.STRING,
             id_at: DataTypes.STRING,
             client: DataTypes.INTEGER,
@@ -24,7 +26,11 @@ class RequestMounts extends Model {
             {
                 sequelize
             }
-        );
+        )
+    }
+
+    static associate(models){
+        this.belongsTo(models.Users, { foreignKey: 'user_id', as: 'mountsToUser'})
     }
 }
 

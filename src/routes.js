@@ -6,13 +6,15 @@ const UserController = require('./controllers/UserController');
 const SessionController = require('./controllers/SessionController');
 
 const RequestMountsController = require('./controllers/RequestMountsController');
+const ApprovalMountsController = require('./controllers/ApprovalMountsController');
 
 const FeatureController = require('./controllers/FeatureController');
 
 const MenuArvore = require('./controllers/MenuCategoriasController');
 const MontarMenuCategorias = require('./controllers/MontaMenuCategoriasController');
 
-const CadastroClienteFilial = require('./controllers/CadastroClienteFilialController')
+const CadastroClienteFilial = require('./controllers/CadastroClienteFilialController');
+const approvalMounts = require('./models/ApprovalMounts');
 
 const routes = Router();
 
@@ -41,6 +43,10 @@ routes.get('/requestmounts', authMiddleware,  RequestMountsController.index);
 routes.post('/requestmounts', authMiddleware, RequestMountsController.store);
 routes.get('/requestmounts/:idMount', authMiddleware, RequestMountsController.show);
 routes.put('/requestmounts/:idMount', authMiddleware, RequestMountsController.update);
+
+    //Routes approval mounts
+    routes.post('/approvalmounts/:idMount', authMiddleware, ApprovalMountsController.store);
+    routes.get('/approvalmounts/:idMount', authMiddleware, ApprovalMountsController.show);
 
 //Routes Cadastro Clientes Filial
 routes.get('/clienteFilial', authMiddleware, CadastroClienteFilial.index);
