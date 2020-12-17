@@ -21,7 +21,7 @@ transport.use('compile', hbs({
         layoutsDir: resolve(viewPath, 'montagemExterna'),
         partialsDir: resolve(viewPath, 'partials'),
         defaultLayout: 'solicitacaoMontagemEnviada',
-        extname: '.handelbars',
+        extname: '.handlebars',
     }),
     viewPath,
     extname: '.handlebars'

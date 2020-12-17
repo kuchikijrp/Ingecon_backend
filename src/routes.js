@@ -2,6 +2,8 @@ const { Router } = require('express');
 
 const authMiddleware = require('./middlewares/auth');
 
+const SysRulesController = require('./controllers/RulesController');
+
 const UserController = require('./controllers/UserController');
 const SessionController = require('./controllers/SessionController');
 
@@ -51,5 +53,10 @@ routes.put('/requestmounts/:idMount', authMiddleware, RequestMountsController.up
 //Routes Cadastro Clientes Filial
 routes.get('/clienteFilial', authMiddleware, CadastroClienteFilial.index);
 routes.get('/clienteFilial/:id', authMiddleware, CadastroClienteFilial.show);
+
+//Routes para Rules
+routes.post('/sysRules', authMiddleware, SysRulesController.store);
+routes.delete('/sysRules/:id', authMiddleware, SysRulesController.delete);
+
 
 module.exports = routes;

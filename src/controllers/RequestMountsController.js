@@ -3,6 +3,7 @@ const mailer = require('../modules/mailer');
 const RequestMount = require('../models/RequestMounts');
 const ApprovalMount = require('../models/ApprovalMounts');
 const User = require('../models/User');
+const sysRules = require('../models/Rules');
 
 const { decode } = require('jsonwebtoken');
 
@@ -16,7 +17,7 @@ module.exports = {
         const userid = payload.sub;
         
         try{
-            const mount = await RequestMount.findByPk(idMount)
+            const mount = await RequestMount.findByPk(idMount, {include: ['mountsToUser']})
 
             // console.log(mount)
             if (mount){
@@ -37,22 +38,24 @@ module.exports = {
         const userid = payload.sub;
 
         try{
-            const mountsrequest = await RequestMount.findAll({
-                where: {
-                  user_id: userid
-                }
-              });
+            const rule = await sysRules.findOne({where : {user_id : userid, name: 'montagemExterna_ADM'}});
+            // console.log(rule);
+
+
+            const mountsrequest = rule ? await RequestMount.findAll({include: ['mountsToUser']}) : await RequestMount.findAll({where: {user_id: userid}})
             
+
+            // console.log(mountsrequest)
             return res.send(mountsrequest);
         }catch(err){
-            // console.log(err)
+            console.log(err)
             return res.send(err)
         }
 
     },
 
     async update(req, res){
-        const {idMount, status, obs} = req.body;
+        const {idMount, status, obs, obsTotal, emailUser, emailDonoMont} = req.body;
         // console.log(req.body);
 
         const authHeader = req.headers.authorization || "";
@@ -62,13 +65,16 @@ module.exports = {
         const userid = payload.sub;
 
         try {
-            const mount = await RequestMount.update({status},
+            await RequestMount.update({status},
                 {
                     where: {
                         id: idMount
                     }
                 });
-                
+
+            const mount = await RequestMount.findOne({where: {id: idMount}})
+            // console.log(mount.dataValues);
+
             const user = await User.findOne({id : userid});
             // console.log(user.dataValues.usuario);
                 
@@ -80,16 +86,29 @@ module.exports = {
                 obs
             });
 
-
-                    await mailer.sendMail({
-                        to: 'juliano.piris@ingecon.com.br',
-                        // cc: emailUser,
-                        from: 'sistema@ingecon.com.br',
-                        subject:`Solicitação Montagem - ${idMount} - ${status}`,
-                        template: 'solicitacaoMontagemEnviada',
-                    })
+            await mailer.sendMail({
+                to: emailDonoMont,
+                cc: emailUser,
+                from: 'sistema@ingecon.com.br',
+                subject:`Solicitação Montagem - ${mount.dataValues.type} ${idMount} - ${status}`,
+                template: 'solicitacaoMontagemEnviada',
+                context: {
+                    msg : 'Houve atualização em sua solicitação.',
+                    tipoSolicitacao: mount.dataValues.type,
+                    idSolicitacao: mount.dataValues.id,
+                    tipoLoja: mount.dataValues.store,
+                    inicio: mount.dataValues.start_work,
+                    fim: mount.dataValues.end_work,
+                    orcamento: mount.dataValues.budgeted,
+                    status : mount.dataValues.status,
+                    obs: obsTotal
+                }
+            }, (err) => {
+                if(err)
+                    return console.log(err);
+            })
                 
-                return res.send({"msg": "Solicitação salva com sucesso"})
+            return res.send({"msg": "Solicitação salva com sucesso"})
 
         } catch (err) {
             console.log(err)
@@ -130,8 +149,19 @@ module.exports = {
                     to: 'juliano.piris@ingecon.com.br',
                     cc: emailUser,
                     from: 'sistema@ingecon.com.br',
-                    subject:`Solicitação Montagem - ${mount.id}`,
-                    template: 'solicitacaoMontagemEnviada',
+                    subject:`Solicitação Montagem - ${mount.type} ${mount.id} - ${mount.status}`,
+                    template: 'solicitacaoMontagemEnviada',                    
+                    context: {
+                        msg : 'Nova solicitação aberta com sucesso! Aguarde retorno da equipe da montagem externa.',
+                        tipoSolicitacao: mount.type,
+                        idSolicitacao: mount.id,
+                        tipoLoja: mount.store,
+                        inicio: mount.start_work,
+                        fim: mount.end_work,
+                        orcamento: mount.budgeted,
+                        status : mount.status,
+                        obs: mount.obs
+                    }
                 }, (err) => {
                     if(err)
                         return console.log(err);
@@ -141,6 +171,7 @@ module.exports = {
                 return res.send(mount);
 
             }catch(err){
+                console.log(err);
                 return res.send(err)
             }
     }

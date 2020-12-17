@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="width: 90%; margin: 10px auto;">
+    <div >
+        <table style="align-items: center; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: rgb(84, 88, 90);">
+                    <td style="width: 90%;"><h1 style="color: #fff; margin-left: 20px;">Solicitação Montagem - {{tipoSolicitacao}}</h1></td>
+                    <td ><img src="https://i.ibb.co/zRxFPrC/logo-Ingecon3.png" alt="logo-Ingecon3" style="margin: 10px 20px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: rgb(217, 217, 214)">
+                    <td colspan="2">
+                        <br />
+                        <strong style="margin: 0 20px;">Solicitação de {{tipoSolicitacao}}, número {{idSolicitacao}}.</strong> <br /><br />
+                        <p style="margin: 0 20px;">{{msg}}</p> <br />
+                        <p style="margin: 0 20px;">
+                        <strong>Loja: </strong> {{ loja }} <br />
+                        <strong>Tipo Loja: </strong> {{ tipoLoja }} <br />
+                        <strong>Tipo Serviço: </strong> {{ tipoServico }} <br />
+                        <strong>Inicio Obra: </strong> {{ inicio }} <br />
+                        <strong>Fim Obra: </strong> {{ fim }} <br />
+                        <strong>Orçamento: </strong> {{ orcamento }} <br />
+                        <strong>Status: </strong> <span>{{ status }}</span> <br />
+                        </p><br /><br />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

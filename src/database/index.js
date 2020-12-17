@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
 
 
+const Rules = require('../models/Rules')
+
 const User = require('../models/User');
 const MenuArvore = require('../models/MenuArvore')
 const Feature = require('../models/Feature')
@@ -11,6 +13,8 @@ const CadastroClienteFilial = require('../models/CadastroClienteFilial');
 
 const connection = new Sequelize(dbConfig);
 
+
+Rules.init(connection);
 
 User.init(connection);
 MenuArvore.init(connection);
