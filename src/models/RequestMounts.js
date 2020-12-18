@@ -21,6 +21,15 @@ class RequestMounts extends Model {
             time_discharge: DataTypes.STRING,
             time_work: DataTypes.STRING,
             obs: DataTypes.TEXT,
+            vl_alimentacao: DataTypes.STRING,
+            vl_material: DataTypes.STRING,
+            vl_deslocamento: DataTypes.STRING,
+            vl_combustivel: DataTypes.STRING,
+            vl_passagem: DataTypes.STRING,
+            vl_hospedagem: DataTypes.STRING,
+            vl_terceiros: DataTypes.STRING,
+            vl_outros: DataTypes.STRING,
+            vl_desp_total: DataTypes.STRING,
             status: DataTypes.STRING
         },
             {

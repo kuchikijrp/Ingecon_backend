@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "producao": "pm2 start src/server.js --name BACKEND",
+    "producao": "pm2 start src/server.js --name BACKEND"
   },
   "license": "MIT",
   "dependencies": {

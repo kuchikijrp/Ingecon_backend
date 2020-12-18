@@ -68,6 +68,42 @@ module.exports = {
       obs:{
         type: Sequelize.TEXT
       },
+      vl_alimentacao:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_material:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_deslocamento:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_combustivel:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_passagem:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_hospedagem:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_terceiros:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_outros:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_desp_total:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
       status:{
         type: Sequelize.STRING
       },
