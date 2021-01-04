@@ -38,6 +38,8 @@ routes.get('/montarMenu', authMiddleware, MontarMenuCategorias.index);
 //Rotas de usuarios
 routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
+routes.get('/users/:userId', UserController.show);
+routes.put('/users/resetSenha/:userId', UserController.update);
 routes.delete('/users/:email', UserController.destroy);
 
 //Routes request mounts

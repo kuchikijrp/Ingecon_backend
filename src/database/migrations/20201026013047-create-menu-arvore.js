@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true
       },
+      route:{
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       status:{
         type: sequelize.BOOLEAN,
         allowNull: false
@@ -29,12 +33,42 @@ module.exports = {
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       }
+        }).then(function(){
+          queryInterface.bulkInsert('sys_menu_arvores', [{
+            name: 'Administração Sistema',
+            parent: null,
+            route: '',
+            status: 1,
+            menu: 1
+          }, {
+            name: 'Usuários',
+            parent: 1,
+            route: 'users',
+            status: 1,
+            menu: 1
+          }, {
+            name: 'Montagem Externa',
+            parent: null,
+            route: '',
+            status: 1,
+            menu: 1
+          },
+          , {
+            name: 'Minhas Solicitações',
+            parent: 3,
+            route: 'solicitacoesMontagem',
+            status: 1,
+            menu: 1
+          }
+        ]);
+          // queryInterface.sequelize.query("insert into sys_menu_arvores (name, parent, route, status, menu) values('Administração Usuários', null, 'null', '1', '1'), insert into sys_menu_arvores (name, parent, route, status, menu) values('Usuários', 1, 'users', '1', '1')")
+          // queryInterface.sequelize.query("insert into sys_menu_arvores (name, parent, route, status, menu) values('Usuários', 1, 'users', '1', '1')")
         });
   },
 

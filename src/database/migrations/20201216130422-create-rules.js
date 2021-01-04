@@ -22,12 +22,17 @@ module.exports = {
         },
         created_at: {
           type: Sequelize.DATE,
-          allowNull: false
+          allowNull: true
         },
         updated_at: {
           type: Sequelize.DATE,
-          allowNull: false,
+          allowNull: true,
         }
+      }).then(function(){
+        queryInterface.bulkInsert('sys_rules', [{
+          user_id: 1,
+          name: 'ROLE_SUPER',
+        }]);
       });
   },
 

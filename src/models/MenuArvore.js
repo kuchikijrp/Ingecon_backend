@@ -5,6 +5,7 @@ class SysMenuArvore extends Model {
         super.init({
             name: DataTypes.STRING,
             parent: DataTypes.INTEGER,
+            route: DataTypes.STRING,
             status: DataTypes.BOOLEAN,
             menu: DataTypes.BOOLEAN
         },

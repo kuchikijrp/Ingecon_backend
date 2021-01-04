@@ -1,9 +1,10 @@
 const mailer = require('../modules/mailer');
-
 const RequestMount = require('../models/RequestMounts');
 const ApprovalMount = require('../models/ApprovalMounts');
 const User = require('../models/User');
 const sysRules = require('../models/Rules');
+
+const { Op } = require('sequelize');
 
 const { decode } = require('jsonwebtoken');
 
@@ -38,11 +39,12 @@ module.exports = {
         const userid = payload.sub;
 
         try{
-            const rule = await sysRules.findOne({where : {user_id : userid, name: 'montagemExterna_ADM'}});
+            const rule = await sysRules.findOne({where : {user_id : userid, name:{[Op.in] : ['montagemExterna_ADM', 'ROLE_SUPER']}}});
             // console.log(rule);
 
 
-            const mountsrequest = rule ? await RequestMount.findAll({include: ['mountsToUser']}) : await RequestMount.findAll({where: {user_id: userid}})
+            // const mountsrequest = rule ? await RequestMount.findAll({include: ['mountsToUser']}) : await RequestMount.findAll({where: {user_id: userid}})
+            const mountsrequest = await RequestMount.findAll({include: ['mountsToUser']})
             
 
             // console.log(mountsrequest)

@@ -22,12 +22,13 @@ module.exports = {
     },
 
     async store(req, res){
-        const {name, parent, status, menu} = req.body;
+        const {name, parent, status, menu, route} = req.body;
         // console.log(req.body)
         try {
             const itemMenu = await MenuArvore.create({
                 name,
                 parent,
+                route,
                 status, 
                 menu
             });

@@ -27,14 +27,26 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      reset_pass:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       created_at:{
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       updated_at:{
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       }
+    }).then(function(){
+      queryInterface.bulkInsert('users', [{
+        name: 'Administrador',
+        usuario: 'Admin',
+        email: '',
+        password: 'admin',
+        reset_pass: 1
+      }]);
     });
   },
 
