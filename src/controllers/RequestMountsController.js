@@ -57,7 +57,7 @@ module.exports = {
     },
 
     async update(req, res){
-        const {idMount, status, obs, obsTotal, emailUser, emailDonoMont, alimentacao, material, deslocamento, combustivel, passagem, hospedagem, terceiros, outros, despesas} = req.body;
+        const {idMount, status, obs, obsTotal, emailUser, emailDonoMont, alimentacao, material, deslocamento, combustivel, passagem, hospedagem, terceiros, outros, despesas, diarias, impostos} = req.body;
         // console.log(req.body);
 
         const authHeader = req.headers.authorization || "";
@@ -86,7 +86,9 @@ module.exports = {
                 vl_hospedagem: hospedagem,
                 vl_terceiros: terceiros,
                 vl_outros: outros,
-                vl_desp_total: despesas
+                vl_desp_total: despesas,
+                vl_diarias: diarias,
+                vl_impostos: impostos
                 },
                 {
                     where: {

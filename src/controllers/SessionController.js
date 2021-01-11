@@ -16,14 +16,14 @@ module.exports = {
             return res.send({ 'error': 'Usuário não encontrado' });
             
             const reset = user.reset_pass;
-            console.log(password , user.password);
+            // console.log(password , user.password);
             if(user.reset_pass === 1){
                 if (password !== user.password){
                     // return res.send({ 'error': 'Senha invalida' })
                     return res.json({ error: 'Senha invalida' })
                 }
             }else{
-                console.log(await bcrypt.compare(password, user.password));
+                // console.log(await bcrypt.compare(password, user.password));
                 if (!await bcrypt.compare(password, user.password))
                     return res.json({ error: 'Senha invalida' })
             }

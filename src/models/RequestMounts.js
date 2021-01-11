@@ -27,7 +27,9 @@ class RequestMounts extends Model {
             vl_combustivel: DataTypes.STRING,
             vl_passagem: DataTypes.STRING,
             vl_hospedagem: DataTypes.STRING,
+            vl_diarias: DataTypes.STRING,
             vl_terceiros: DataTypes.STRING,
+            vl_impostos: DataTypes.STRING,
             vl_outros: DataTypes.STRING,
             vl_desp_total: DataTypes.STRING,
             status: DataTypes.STRING

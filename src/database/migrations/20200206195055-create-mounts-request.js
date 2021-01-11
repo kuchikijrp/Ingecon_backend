@@ -92,7 +92,15 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true
       },
+      vl_diarias:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
       vl_terceiros:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_impostos:{
         type: Sequelize.DOUBLE,
         allowNull: true
       },
