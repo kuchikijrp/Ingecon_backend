@@ -63,6 +63,7 @@ module.exports = {
         const authHeader = req.headers.authorization || "";
         const [ , token] = authHeader.split(" ");
         const payload = decode(token);
+        // console.log(payload);
 
         let email = ''
 
@@ -99,8 +100,8 @@ module.exports = {
             mount = await RequestMount.findOne({where: {id: idMount}})
             // console.log(mount.dataValues);
 
-            const user = await User.findOne({id : userid});
-            // console.log(user.dataValues.usuario);
+            const user = await User.findByPk(userid);
+            // console.log(user);
                 
             const approvalMount = await ApprovalMount.create({
                 user_id: userid,
