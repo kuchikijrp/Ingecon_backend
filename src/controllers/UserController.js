@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Rules = require('../models/Rules');
 
 const generateToken = require('../config/generateToken');
 
@@ -25,6 +26,11 @@ module.exports = {
 
             user = await User.create({ name : nome, usuario, email, password: pass, reset_pass: resetPass });
             
+            Rules.create({
+                user_id: user.id,
+                name: 'montagemExterna_USER'
+            })
+
             user.password = undefined;
             
             const token = generateToken(user.id);

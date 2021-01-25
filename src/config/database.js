@@ -6,7 +6,8 @@ module.exports = {
     password: 'apiIngecon',
     database: 'BD_Comercial_dev',
     // database: 'BD_Comercial',
-    timezone: 'utc',
+    // timezone: 'utc',
+    timezone: '-03:00',
     define: {
         timestamps: true,
         underscored: true

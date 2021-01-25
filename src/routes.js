@@ -16,7 +16,8 @@ const MenuArvore = require('./controllers/MenuCategoriasController');
 const MontarMenuCategorias = require('./controllers/MontaMenuCategoriasController');
 
 const CadastroClienteFilial = require('./controllers/CadastroClienteFilialController');
-const approvalMounts = require('./models/ApprovalMounts');
+
+const FormaPagamento = require('./controllers/FormaPagamentoController');
 
 const routes = Router();
 
@@ -60,5 +61,7 @@ routes.get('/clienteFilial/:id', authMiddleware, CadastroClienteFilial.show);
 routes.post('/sysRules', authMiddleware, SysRulesController.store);
 routes.delete('/sysRules/:id', authMiddleware, SysRulesController.delete);
 
+//Routes para Formas Pagamento
+routes.get('/formasPagamento', FormaPagamento.index);
 
 module.exports = routes;

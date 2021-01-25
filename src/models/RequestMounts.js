@@ -18,6 +18,7 @@ class RequestMounts extends Model {
             end_work: DataTypes.DATE,
             qtd_fitters: DataTypes.INTEGER,
             budgeted: DataTypes.STRING,
+            form_pagto: DataTypes.STRING,
             time_discharge: DataTypes.STRING,
             time_work: DataTypes.STRING,
             obs: DataTypes.TEXT,

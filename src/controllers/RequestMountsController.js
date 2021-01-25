@@ -114,7 +114,8 @@ module.exports = {
             if (email){
                 await mailer.sendMail({
                     to: emailDonoMont,
-                    cc: emailUser,
+                    cc: 'montagem.externa@ingecon.com.br; juliano.piris@ingecon.com.br',
+                    // cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.dataValues.type} ${idMount} - ${status}`,
                     template: 'solicitacaoMontagemEnviada',
@@ -145,7 +146,7 @@ module.exports = {
     },
 
     async store(req, res){
-        const {type, id_at, client, store, contact_store, contact_phone, type_work, start_work, end_work, qtd_fitters, budgeted, time_discharge, time_work, obs, emailUser} = req.body;
+        const {type, id_at, client, store, contact_store, contact_phone, type_work, start_work, end_work, qtd_fitters, budgeted, form_pagto, time_discharge, time_work, obs, emailUser} = req.body;
        
         const authHeader = req.headers.authorization || "";
         const [ , token] = authHeader.split(" ");
@@ -167,6 +168,7 @@ module.exports = {
                     end_work,
                     qtd_fitters,
                     budgeted,
+                    form_pagto,
                     time_discharge,
                     time_work,
                     obs,
@@ -174,7 +176,8 @@ module.exports = {
                 });
                 
                 await mailer.sendMail({
-                    to: 'juliano.piris@ingecon.com.br',
+                    to: 'montagem.externa@ingecon.com.br; juliano.piris@ingecon.com.br',
+                    // to: 'kuchikijuliano@gmail.com',
                     cc: emailUser,
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.type} ${mount.id} - ${mount.status}`,

@@ -10,6 +10,7 @@ const Feature = require('../models/Feature')
 const RequestMounts = require('../models/RequestMounts');
 const ApprovalMounts = require('../models/ApprovalMounts');
 const CadastroClienteFilial = require('../models/CadastroClienteFilial');
+const FormaPagamento = require('../models/FormaPagamento');
 
 const connection = new Sequelize(dbConfig);
 
@@ -23,6 +24,7 @@ RequestMounts.init(connection);
 // ApprovalMounts.init(connection);;
 ApprovalMounts.init(connection);
 CadastroClienteFilial.init(connection);
+FormaPagamento.init(connection);
 
 User.associate(connection.models);
 RequestMounts.associate(connection.models);

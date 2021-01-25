@@ -59,6 +59,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false
       },
+      form_pagto: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
       time_discharge: {
         type: Sequelize.STRING
       },

@@ -30,12 +30,13 @@ module.exports = {
                     id_cliente: {[Op.notIn] : [99999, 99991]}
                 }
             })
-
+            // console.log(filiais)
             if (filiais)
                 return res.send(filiais)
             else
                 return res.send({'msg' : 'Cliente não encontrado'});
         } catch (error) {
+            // console.log(error)
             return res.send(error)
         }
     }
