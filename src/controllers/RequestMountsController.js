@@ -113,8 +113,8 @@ module.exports = {
 
             if (email){
                 await mailer.sendMail({
-                    to: emailDonoMont,
-                    cc: 'montagem.externa@ingecon.com.br; juliano.piris@ingecon.com.br',
+                    to: 'geral.comercial@ingecon.com.br',
+                    cc: 'montagem.externa@ingecon.com.br',
                     // cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.dataValues.type} ${idMount} - ${status}`,
@@ -176,9 +176,9 @@ module.exports = {
                 });
                 
                 await mailer.sendMail({
-                    to: 'montagem.externa@ingecon.com.br; juliano.piris@ingecon.com.br',
+                    to: 'montagem.externa@ingecon.com.br',
                     // to: 'kuchikijuliano@gmail.com',
-                    cc: emailUser,
+                    cc: 'geral.comercial@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.type} ${mount.id} - ${mount.status}`,
                     template: 'solicitacaoMontagemEnviada',                    
