@@ -44,11 +44,11 @@ module.exports = {
         allowNull: false
       },
       start_work: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         allowNull: false
       },
       end_work: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         allowNull: false
       },
       qtd_fitters:{

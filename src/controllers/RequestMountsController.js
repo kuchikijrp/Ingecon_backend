@@ -153,7 +153,7 @@ module.exports = {
         const payload = decode(token);
 
         const userid = payload.sub;
-        // console.log(userid);
+        // console.log(req.body);
             try{
                 const mount = await RequestMount.create({
                     user_id: userid,
