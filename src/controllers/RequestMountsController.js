@@ -118,9 +118,9 @@ module.exports = {
             
             if (email){
                 await mailer.sendMail({
-                    // to: 'geral.comercial@ingecon.com.br',
-                    // cc: 'montagem.externa@ingecon.com.br',
-                    cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
+                    to: 'geral.comercial@ingecon.com.br',
+                    cc: 'montagem.externa@ingecon.com.br',
+                    // cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.dataValues.type} ${idMount} - ${status}`,
                     template: 'solicitacaoMontagemEnviada',
@@ -181,9 +181,9 @@ module.exports = {
                 });
                 
                 await mailer.sendMail({
-                    // to: 'montagem.externa@ingecon.com.br',
-                    to: 'kuchikijuliano@gmail.com',
-                    // cc: 'geral.comercial@ingecon.com.br',
+                    to: 'montagem.externa@ingecon.com.br',
+                    cc: 'geral.comercial@ingecon.com.br',
+                    // to: 'kuchikijuliano@gmail.com',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.type} ${mount.id} - ${mount.status}`,
                     template: 'solicitacaoMontagemEnviada',                    
