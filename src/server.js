@@ -1,3 +1,7 @@
+require('dotenv').config({
+    path: (process.env.NODE_ENV || '').trim() === 'dev' ? '.env.dev' : '.env'
+});
+
 const express = require('express');
 
 const cors = require('cors');
@@ -12,4 +16,5 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.listen(3333);
+// console.log(process.env.DB_NAME)
+app.listen(process.env.SERVER_PORT || 17380);

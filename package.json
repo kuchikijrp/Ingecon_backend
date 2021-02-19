@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "dev": "set NODE_ENV=dev&& nodemon src/server.js",
+    "start": "node src/server.js",
     "producao": "pm2 start src/server.js --name BACKEND"
   },
   "license": "MIT",
@@ -11,6 +12,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "jsonwebtoken": "^8.5.1",

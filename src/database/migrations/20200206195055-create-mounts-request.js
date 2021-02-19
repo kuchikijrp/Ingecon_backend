@@ -104,11 +104,15 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: true
       },
-      vl_impostos:{
+      vl_outros:{
         type: Sequelize.DOUBLE,
         allowNull: true
       },
-      vl_outros:{
+      vl_tx_adm_equipe:{
+        type: Sequelize.DOUBLE,
+        allowNull: true
+      },
+      vl_impostos:{
         type: Sequelize.DOUBLE,
         allowNull: true
       },

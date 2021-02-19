@@ -28,7 +28,10 @@ module.exports = {
             const filiais = await cadastroClienteFilial.findAll({
                 where: {
                     id_cliente: {[Op.notIn] : [99999, 99991]}
-                }
+                },
+                order: [
+                    ['NM_DESC_FILIAL', 'ASC']
+                ]
             })
             // console.log(filiais)
             if (filiais)

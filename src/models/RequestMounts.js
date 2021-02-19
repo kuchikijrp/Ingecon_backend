@@ -30,8 +30,9 @@ class RequestMounts extends Model {
             vl_hospedagem: DataTypes.STRING,
             vl_diarias: DataTypes.STRING,
             vl_terceiros: DataTypes.STRING,
-            vl_impostos: DataTypes.STRING,
             vl_outros: DataTypes.STRING,
+            vl_tx_adm_equipe: DataTypes.STRING,
+            vl_impostos: DataTypes.STRING,
             vl_desp_total: DataTypes.STRING,
             status: DataTypes.STRING
         },

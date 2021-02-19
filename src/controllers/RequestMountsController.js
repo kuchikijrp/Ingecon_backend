@@ -57,7 +57,7 @@ module.exports = {
     },
 
     async update(req, res){
-        const {idMount, status, obs, obsTotal, emailUser, emailDonoMont, alimentacao, material, deslocamento, combustivel, passagem, hospedagem, terceiros, outros, despesas, diarias, impostos} = req.body;
+        const {idMount, status, obs, obsTotal, emailUser, emailDonoMont, alimentacao, material, deslocamento, combustivel, passagem, hospedagem, terceiros, outros, despesas, diarias, impostos, txAdmEquipe} = req.body;
         // console.log(req.body);
 
         const authHeader = req.headers.authorization || "";
@@ -89,7 +89,8 @@ module.exports = {
                 vl_outros: outros,
                 vl_desp_total: despesas,
                 vl_diarias: diarias,
-                vl_impostos: impostos
+                vl_impostos: impostos,
+                vl_tx_adm_equipe: txAdmEquipe
                 },
                 {
                     where: {
@@ -102,20 +103,24 @@ module.exports = {
 
             const user = await User.findByPk(userid);
             // console.log(user);
-                
-            const approvalMount = await ApprovalMount.create({
-                user_id: userid,
-                user_name: user.dataValues.usuario,
-                mount_id: idMount,
-                status,
-                obs
-            });
+            
+            console.log(obs || email)
+            if(obs || email){
+                const approvalMount = await ApprovalMount.create({
+                    user_id: userid,
+                    user_name: user.dataValues.usuario,
+                    mount_id: idMount,
+                    status,
+                    obs
+                });
 
+            }
+            
             if (email){
                 await mailer.sendMail({
-                    to: 'geral.comercial@ingecon.com.br',
-                    cc: 'montagem.externa@ingecon.com.br',
-                    // cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
+                    // to: 'geral.comercial@ingecon.com.br',
+                    // cc: 'montagem.externa@ingecon.com.br',
+                    cc: 'kuchikijuliano@gmail.com; juliano.piris@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.dataValues.type} ${idMount} - ${status}`,
                     template: 'solicitacaoMontagemEnviada',
@@ -176,9 +181,9 @@ module.exports = {
                 });
                 
                 await mailer.sendMail({
-                    to: 'montagem.externa@ingecon.com.br',
-                    // to: 'kuchikijuliano@gmail.com',
-                    cc: 'geral.comercial@ingecon.com.br',
+                    // to: 'montagem.externa@ingecon.com.br',
+                    to: 'kuchikijuliano@gmail.com',
+                    // cc: 'geral.comercial@ingecon.com.br',
                     from: 'sistema@ingecon.com.br',
                     subject:`Solicitação Montagem - ${mount.type} ${mount.id} - ${mount.status}`,
                     template: 'solicitacaoMontagemEnviada',                    

@@ -4,8 +4,8 @@ module.exports = {
     port: '65465',
     username: 'apiIngecon',
     password: 'apiIngecon',
+    // database: process.env.DB_NAME,
     database: 'BD_Comercial_dev',
-    // database: 'BD_Comercial',
     // timezone: 'utc',
     timezone: '-03:00',
     define: {
