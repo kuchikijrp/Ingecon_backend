@@ -52,20 +52,35 @@ module.exports = {
             route: 'users',
             status: 1,
             menu: 1
-          }, {
+          }, 
+          {
             name: 'Montagem Externa',
             parent: null,
             route: '',
             status: 1,
             menu: 1
           },
-          , {
+          {
             name: 'Minhas Solicitações',
             parent: 3,
             route: 'solicitacoesMontagem',
             status: 1,
             menu: 1
-          }
+          },
+          {
+            name: 'Manutenção Interna',
+            parent: null,
+            route: '',
+            status: 1,
+            menu: 1
+          },
+          {
+            name: 'Minhas Solicitações',
+            parent: 5,
+            route: 'ManutencaoInterna',
+            status: 1,
+            menu: 1
+          },
         ]);
           // queryInterface.sequelize.query("insert into sys_menu_arvores (name, parent, route, status, menu) values('Administração Usuários', null, 'null', '1', '1'), insert into sys_menu_arvores (name, parent, route, status, menu) values('Usuários', 1, 'users', '1', '1')")
           // queryInterface.sequelize.query("insert into sys_menu_arvores (name, parent, route, status, menu) values('Usuários', 1, 'users', '1', '1')")

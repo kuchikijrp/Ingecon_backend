@@ -17,4 +17,7 @@ app.use(express.json());
 app.use(routes);
 
 // console.log(process.env.DB_NAME)
-app.listen(process.env.SERVER_PORT || 17380);
+app.listen(process.env.SERVER_PORT || 17380, () => {
+    console.log(`App listening at http://localhost:${process.env.SERVER_PORT}`)
+    console.log(`Database connected ${process.env.DB_NAME}`)
+});

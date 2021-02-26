@@ -19,6 +19,8 @@ const CadastroClienteFilial = require('./controllers/CadastroClienteFilialContro
 
 const FormaPagamento = require('./controllers/FormaPagamentoController');
 
+const ManutencaoInterna = require('./controllers/ManutencaoInternaController');
+
 const routes = Router();
 
 //Rotas de autenticação
@@ -52,6 +54,13 @@ routes.put('/requestmounts/:idMount', authMiddleware, RequestMountsController.up
     //Routes approval mounts
     routes.post('/approvalmounts/:idMount', authMiddleware, ApprovalMountsController.store);
     routes.get('/approvalmounts/:idMount', authMiddleware, ApprovalMountsController.show);
+
+
+//Routes Manutencao Interna
+routes.post('/manutencaoInterna/new', authMiddleware, ManutencaoInterna.store);
+routes.get('/manutencaoInterna/', authMiddleware, ManutencaoInterna.index);
+routes.get('/manutencaoInterna/:id', authMiddleware, ManutencaoInterna.show);
+routes.put('/manutencaoInterna/:id', authMiddleware, ManutencaoInterna.update);
 
 //Routes Cadastro Clientes Filial
 routes.get('/clienteFilial', authMiddleware, CadastroClienteFilial.index);

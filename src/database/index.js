@@ -11,6 +11,9 @@ const RequestMounts = require('../models/RequestMounts');
 const ApprovalMounts = require('../models/ApprovalMounts');
 const CadastroClienteFilial = require('../models/CadastroClienteFilial');
 const FormaPagamento = require('../models/FormaPagamento');
+const ManutencaoInterna = require('../models/ManutencaoInterna');
+const tblRhFuncionarios = require('../models/RhFuncionarios');
+
 
 const connection = new Sequelize(dbConfig);
 
@@ -25,9 +28,12 @@ RequestMounts.init(connection);
 ApprovalMounts.init(connection);
 CadastroClienteFilial.init(connection);
 FormaPagamento.init(connection);
+ManutencaoInterna.init(connection)
+tblRhFuncionarios.init(connection)
 
 User.associate(connection.models);
 RequestMounts.associate(connection.models);
 ApprovalMounts.associate(connection.models);
+ManutencaoInterna.associate(connection.models);
 
 module.exports = connection;
