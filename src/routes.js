@@ -21,6 +21,8 @@ const FormaPagamento = require('./controllers/FormaPagamentoController');
 
 const ManutencaoInterna = require('./controllers/ManutencaoInternaController');
 
+const RhFuncionarios = require('./controllers/CadastroFuncionariosController')
+
 const routes = Router();
 
 //Rotas de autenticação
@@ -72,5 +74,9 @@ routes.delete('/sysRules/:id', authMiddleware, SysRulesController.delete);
 
 //Routes para Formas Pagamento
 routes.get('/formasPagamento', FormaPagamento.index);
+
+
+//Routes para funcionarios
+routes.get('/funcionariosPorLotacao/:lotacao', RhFuncionarios.show)
 
 module.exports = routes;

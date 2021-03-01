@@ -13,6 +13,7 @@ class ManutencaoInterna extends Model {
             tipo_servico: DataTypes.STRING,
             descricao_problema: DataTypes.TEXT,
             id_tecnico: DataTypes.INTEGER,
+            tipo_atendimento: DataTypes.STRING,
             inicio_atendimento: DataTypes.DATE,
             fim_atendimento: DataTypes.DATE,
             status: DataTypes.STRING,

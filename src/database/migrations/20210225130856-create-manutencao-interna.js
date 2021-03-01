@@ -51,6 +51,10 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'NO ACTION'
         },
+        tipo_atendimento: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
         inicio_atendimento: {
           type: Sequelize.DATE,
           allowNull: true,

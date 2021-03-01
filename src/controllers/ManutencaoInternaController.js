@@ -1,8 +1,11 @@
+const { request } = require('express');
 const { decode } = require('jsonwebtoken');
 
 const { Op } = require('sequelize');
 
+const Rules = require('../models/Rules')
 const ManutencaoInterna = require('../models/ManutencaoInterna');
+const User = require('../models/User');
 
 module.exports = {
     async store(req, res){
@@ -22,7 +25,8 @@ module.exports = {
                 situacao_equipamento: situacaoEquipamento,
                 tipo_manutencao: tipoManutencao,
                 tipo_servico: tipoServico,
-                descricao_problema: descricaoProblema
+                descricao_problema: descricaoProblema,
+                status: 'aguardando'
             })
 
             return res.send(manutencao)
@@ -37,22 +41,40 @@ module.exports = {
         const payload = decode(token);
 
         const user_id = payload.sub;
-
+        
         try {
-            const manutencoes = await ManutencaoInterna.findAll(
-                {
+                const ManutencaoInternaADM = await Rules.findOne({
                     where:{
-                        [Op.or]:[
-                            { user_id: user_id },
-                            { id_tecnico: user_id }
+                        [Op.and]:[
+                            {user_id: user_id},
+                            {name: 'manutencaoInterna_ADM'}
                         ]
-                    },
-                    include: ['manutencoesToUser', 'manutencoesToTecnico']
+                    }
                 })
+
+                const manutencoes = !ManutencaoInternaADM? 
+                await ManutencaoInterna.findAll(
+                    {
+                        where:{
+                            [Op.or]:[
+                                { user_id: user_id },
+                                { id_tecnico: user_id }
+                            ]
+                        },
+                        include: ['manutencoesToUser', 'manutencoesToTecnico']
+                    })
+                :
+                    await ManutencaoInterna.findAll(
+                    {
+                        include: ['manutencoesToUser', 'manutencoesToTecnico']
+                    })
+
+            
             
             return res.send(manutencoes)
         } catch (error) {
-            console.log(error)
+            console.log(error.original)
+            return res.send({'Erro': 'Erro ao buscar Solicitações'})
         }
     },
 
@@ -69,15 +91,49 @@ module.exports = {
     },
 
     async update(req, res){
-        const { parecer_tecnico, status } = req.body;
+        const { parecerTecnico, status, tecnico, dtIni, dtFim } = req.body;
         const { id } = req.params;
 
-            try {
+        let user = null
+        if (tecnico !== 'Terceiro'){
+                user = await User.findOne({
+                where: {
+                    name: tecnico
+                }
+            }) 
+            if (!user){
+                return res.send({'Erro': 'Técnico não encontrado'})
+            }
+        }
+        try {
+            if (user !== null){
+                await ManutencaoInterna.update({
+                    id_tecnico: user.dataValues.id,
+                    tipo_atendimento: 'Interno'
+                },
+                {
+                    where: {
+                        id
+                    }
+                })
+                
+            }else{
+                    await ManutencaoInterna.update({
+                        id_tecnico: null,
+                        tipo_atendimento: 'Terceiro'
+                    },
+                    {
+                        where: {
+                            id
+                        }
+                    })                    
+                }
             
+
                 if(status === 'iniciado'){
                     await ManutencaoInterna.update({
-                        inicio_atendimento: new Date,
-                        parecer_tecnico,
+                        inicio_atendimento: dtIni? dtIni : new Date,
+                        parecer_tecnico: parecerTecnico,
                         status
                     },
                     {
@@ -88,8 +144,20 @@ module.exports = {
                 }
                 if(status === 'finalizado'){
                     await ManutencaoInterna.update({
-                        fim_atendimento: new Date,
-                        parecer_tecnico,
+                        fim_atendimento: dtFim? dtFim : new Date,
+                        parecer_tecnico: parecerTecnico,
+                        status
+                    },
+                    {
+                        where: {
+                            id
+                        }
+                    })
+                }
+                if(status === 'reprovado'){
+                    await ManutencaoInterna.update({
+                        // fim_atendimento: dtFim? dtFim : new Date,
+                        parecer_tecnico: parecerTecnico,
                         status
                     },
                     {
