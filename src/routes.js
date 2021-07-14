@@ -19,6 +19,8 @@ const CadastroClienteFilial = require('./controllers/CadastroClienteFilialContro
 
 const FormaPagamento = require('./controllers/FormaPagamentoController');
 
+const fotosMontagem = require('./controllers/fotosMontagem');
+
 const routes = Router();
 
 //Rotas de autenticação
@@ -63,5 +65,8 @@ routes.delete('/sysRules/:id', authMiddleware, SysRulesController.delete);
 
 //Routes para Formas Pagamento
 routes.get('/formasPagamento', FormaPagamento.index);
+
+//Routes para pegar as fotos das montagens
+routes.get('/fotos', fotosMontagem.index)
 
 module.exports = routes;
